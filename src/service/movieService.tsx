@@ -7,23 +7,25 @@ interface MovieSearchResponse {
   total_results: number;
   total_pages: number;
 }
-const link: string = "https://api.themoviedb.org/3/search/movie";
-const TMDB_KEY: string = import.meta.env.VITE_TMDB_TOKEN;
-export default async function getMovies(searchText: string, page: number = 1): Promise<Movie[]> {
- 
-    const response = await axios.get<MovieSearchResponse>(link, {
-      params: {
-        query: searchText,
-        include_adult: false,
-        language: 'en-US',
-        page: page,
-      },
-        headers: {
-          accept: "application/json",
-          Authorization: `Bearer ${TMDB_KEY}`
-        }
-      },
-    );
-    return response.data.results;
 
+const link: string = "https://api.themoviedb.org/3/search/movie";
+
+
+const TMDB_API_KEY: string = import.meta.env.VITE_TMDB_API_KEY;
+
+export default async function getMovies(searchText: string, page: number = 1): Promise<Movie[]> {
+  const response = await axios.get<MovieSearchResponse>(link, {
+    params: {
+      api_key: TMDB_API_KEY,  
+      query: searchText,
+      include_adult: false,
+      language: "en-US",
+      page,
+    },
+    headers: {
+      accept: "application/json",
+    },
+  });
+
+  return response.data.results;
 }
