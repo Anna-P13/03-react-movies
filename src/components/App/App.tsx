@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
-import getMovies from "../../service/movieService";
+import { getMovies } from "../../service/movieService";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import toast, { Toaster } from "react-hot-toast";
